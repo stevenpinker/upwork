@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  ImageBackground,
-} from "react-native";
+import { View, Text, StyleSheet, Image, ImageBackground } from "react-native";
 import React from "react";
 import BackHeader from "../../common/components/BackHeader";
 import Statusbar from "../../common/components/Statusbar";
@@ -13,12 +6,15 @@ import MainScreen from "../../common/components/MainScreen";
 import colors from "../../common/consts/colors";
 import { fontSizes, spacingSizes } from "../../common/consts/size";
 import Button from "../../common/components/Button";
-import { WIDTH } from "../../common/consts/config";
+import { isSmallDevice, WIDTH } from "../../common/consts/config";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ChooseYourPlan() {
+  const navigation = useNavigation<any>();
   return (
     <View>
-      <Statusbar />
+      <Statusbar barStyle={"light-content"} />
+
       <BackHeader />
       <MainScreen title="Choose your Plan" />
       <View style={styles.selectPlan}>
@@ -26,7 +22,7 @@ export default function ChooseYourPlan() {
           resizeMode="stretch"
           source={require("../../assets/img/vip_plan_bg.png")}
           imageStyle={styles.vipPlanBg}
-          style={[styles.planContainer]}
+          style={styles.planContainer}
         >
           <Image
             style={styles.imageContainer}
@@ -41,13 +37,15 @@ export default function ChooseYourPlan() {
             textStyles={styles.buttonText}
             containerStyles={styles.buttonStyle}
             contentContainerStyle={styles.buttonHeight}
+            onPress={() => navigation.navigate("VipGold")}
           />
           <Button
-            title="Gold"
+            title="Silver"
             linearGradientProps={{ colors: [colors.white, colors.white] }}
             textStyles={styles.buttonText}
             containerStyles={styles.buttonStyle}
             contentContainerStyle={styles.buttonHeight}
+            onPress={() => navigation.navigate("VipSilver")}
           />
         </View>
         <ImageBackground
@@ -57,7 +55,7 @@ export default function ChooseYourPlan() {
           style={[styles.planContainer]}
         >
           <Image
-            style={styles.imageContainer}
+            style={styles.platinumPlanImg}
             source={require("../../assets/img/platinum_plan.png")}
           />
           <Text style={styles.contentText}>STANDARD</Text>
@@ -69,6 +67,7 @@ export default function ChooseYourPlan() {
             textStyles={styles.buttonText}
             containerStyles={styles.buttonStyle}
             contentContainerStyle={styles.buttonHeight}
+            onPress={() => navigation.navigate("StandardPlatinum")}
           />
           <Button
             title="Gold"
@@ -76,6 +75,7 @@ export default function ChooseYourPlan() {
             textStyles={styles.buttonText}
             containerStyles={styles.buttonStyle}
             contentContainerStyle={styles.buttonHeight}
+            onPress={() => navigation.navigate("StandardGold")}
           />
         </View>
         <View style={styles.buttonBottom}>
@@ -85,6 +85,7 @@ export default function ChooseYourPlan() {
             textStyles={styles.buttonText}
             containerStyles={styles.buttonStyle}
             contentContainerStyle={styles.buttonHeight}
+            onPress={() => navigation.navigate("StandardSilver")}
           />
           <Button
             title="Bronze"
@@ -92,6 +93,7 @@ export default function ChooseYourPlan() {
             textStyles={styles.buttonText}
             containerStyles={styles.buttonStyle}
             contentContainerStyle={styles.buttonHeight}
+            onPress={() => navigation.navigate("StandardBronze")}
           />
         </View>
       </View>
@@ -118,27 +120,37 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.large,
   },
   selectPlan: {
-    paddingHorizontal: spacingSizes.large,
+    marginHorizontal: spacingSizes.large,
     position: "relative",
   },
   planContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: spacingSizes.xlarge,
-    height: 200,
+    marginTop: spacingSizes.larger,
+    height: isSmallDevice ? 150 : 200,
     width: "100%",
   },
   vipPlanBg: {
     borderRadius: 10,
   },
-  imageContainer: {
-    height: 100,
-    width: 100,
+  platinumPlanImg: {
+    height: 52,
+    width: 66,
     resizeMode: "contain",
+    marginLeft: spacingSizes.smallMedium,
+    marginBottom: spacingSizes.small,
+  },
+  imageContainer: {
+    height: 75,
+    width: 60,
+    resizeMode: "contain",
+    marginLeft: spacingSizes.smallMedium,
+    marginBottom: spacingSizes.small,
   },
   contentText: {
-    fontWeight: "bold",
+    fontWeight: "700",
     fontSize: fontSizes.xlarge,
+    marginLeft: spacingSizes.smallMedium,
   },
   goldColor: {
     backgroundColor: "#F1D5A8",
@@ -148,13 +160,15 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: "row",
-    justifyContent: "space-around",
-    marginTop: -24,
+    justifyContent: "space-evenly",
+    marginTop: -25,
+    marginLeft: spacingSizes.smallMedium,
   },
   buttonBottom: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     marginVertical: spacingSizes.mediumLarge,
+    marginLeft: spacingSizes.smallMedium,
   },
   buttonBorder: {
     backgroundColor: colors.white,
@@ -171,9 +185,9 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.normal,
   },
   buttonStyle: {
-    width: WIDTH / 2.6,
+    width: WIDTH / 2.9,
     borderWidth: 0.5,
-    height: 45,
+    height: 35,
     borderColor: colors.transparent,
     shadowColor: "#000",
     shadowOffset: {
@@ -189,14 +203,14 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   buttonHeight: {
-    height: 45,
+    height: 35,
   },
   ellipse31: {
     position: "absolute",
     height: 273,
     width: 273,
-    top: 0,
-    right: -80,
+    top: "-15%",
+    right: "-20%",
     zIndex: -999,
   },
   ellipse60: {
@@ -206,5 +220,12 @@ const styles = StyleSheet.create({
     top: 0,
     right: -40,
     zIndex: -999,
+  },
+  leftImage: {
+    position: "absolute",
+    width: 273,
+    height: 273,
+    top: -60,
+    left: 160,
   },
 });

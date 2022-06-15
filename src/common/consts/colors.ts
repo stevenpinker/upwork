@@ -28,4 +28,8 @@ export default {
   termsBlue: "#4896ED",
   skyBlue: "#6AC0E4",
   extremeLightBlue: "#C5C0DC",
+  deepSafroon: "#f9a825",
+  bts: "#9d34cf",
+  purple:"#6242A6"
+
 };

@@ -161,6 +161,23 @@ export default function Settings() {
                   <Icon name="chevron right" />
                 </Row>
               </TouchableOpacity>
+              <TouchableOpacity onPress={()=>{
+                navigation.navigate('ChooseYourPlan')
+              }}>
+                <Row horizontalAlign="space-between" style={styles.listItem}>
+                  <Row>
+                    <Icon
+                      name={"plus"}
+                      color={"gray-900"}
+                      containerStyle={{ opacity: 0 }}
+                    />
+                    <Text style={styles.itemLabelInner}>
+                      Choose Plan
+                    </Text>
+                  </Row>
+                  <Icon name="chevron right" />
+                </Row>
+              </TouchableOpacity>
             </View>
             <View style={styles.divider} />
             <View style={styles.card}>

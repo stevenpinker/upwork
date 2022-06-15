@@ -1,9 +1,11 @@
-import {Dimensions} from 'react-native';
+import { Dimensions } from "react-native";
 
 const {
   width: WIDTH,
   height: HEIGHT,
   fontScale: FONT_SCALE,
-} = Dimensions.get('window');
+} = Dimensions.get("window");
 
-export {WIDTH, HEIGHT, FONT_SCALE};
+const isSmallDevice = HEIGHT < 650 ? true : false;
+
+export { WIDTH, HEIGHT, FONT_SCALE, isSmallDevice };
