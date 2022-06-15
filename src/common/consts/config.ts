@@ -6,6 +6,6 @@ const {
   fontScale: FONT_SCALE,
 } = Dimensions.get("window");
 
-const isSmallDevice = HEIGHT < 650 ? true : false;
+const isSmallDevice = HEIGHT < 700 ? true : false;
 
 export { WIDTH, HEIGHT, FONT_SCALE, isSmallDevice };
